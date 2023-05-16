@@ -1,0 +1,65 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| employee           |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use college;
+Database changed
+mysql> desc college;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| rollno   | int(3)      | YES  |     | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| gender   | varchar(2)  | YES  |     | NULL    |       |
+| dob      | int(11)     | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| city     | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> insert into college values(4,'geetha','f',922005,1234876,'guntur');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into college values(3,'bhavya','f',11105,98657342,'america');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into college values(8,'mahesh','m',4699,83411248,'hyd');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from college;
++--------+--------+--------+--------+----------+---------+
+| rollno | name   | gender | dob    | mobileno | city    |
++--------+--------+--------+--------+----------+---------+
+|      4 | geetha | f      | 922005 |  1234876 | guntur  |
+|      3 | bhavya | f      |  11105 | 98657342 | america |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd     |
++--------+--------+--------+--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select city from college;
++---------+
+| city    |
++---------+
+| guntur  |
+| america |
+| hyd     |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college where city='hyd';
++--------+--------+--------+------+----------+------+
+| rollno | name   | gender | dob  | mobileno | city |
++--------+--------+--------+------+----------+------+
+|      8 | mahesh | m      | 4699 | 83411248 | hyd  |
++--------+--------+--------+------+----------+------+
+1 row in set (0.00 sec)
