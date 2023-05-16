@@ -1,0 +1,71 @@
+mysql> select*from college;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college order by name;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college order by roolno;
+ERROR 1054 (42S22): Unknown column 'roolno' in 'order clause'
+mysql> select*from college order by rollno;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college order by dob;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college order by mobileno;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college order by city;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college order by dept;
++--------+--------+--------+--------+----------+--------+------+
+| rollno | name   | gender | dob    | mobileno | city   | dept |
++--------+--------+--------+--------+----------+--------+------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai | cse  |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    | ece  |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd    | ece  |
++--------+--------+--------+--------+----------+--------+------+
+3 rows in set (0.00 sec)
