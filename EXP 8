@@ -1,0 +1,59 @@
+mysql> use university;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_university |
++----------------------+
+| mentee_details       |
+| staff_details        |
+| stud_department      |
+| stud_details         |
++----------------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from mentee_details;
++-----------+--------------+-------+-----------+------------+-------+--------------+
+| regno     | name         | dept  | address   | fathername | marks | subject      |
++-----------+--------------+-------+-----------+------------+-------+--------------+
+| 192211444 | Pallavi      | AI&ML | Nellore   | vardareddy |    98 | MPMC         |
+| 192211555 | Neelufar     | BIO   | Nellore   | Mahammad   |    99 | Cell Biology |
+| 192211777 | Udhai        | EEE   | Kerala    | Chandra    |    96 | DBMS         |
+| 192211888 | Hariram      | AI&DS | Tamilnadu | Rama       |    92 | PDSD         |
+| 192211666 | Bhargavreddy | CSE   | kadapa    | Subbareddy |    96 | FOC          |
+| 192211333 | Keerthi      | CSE   | Rajempeta | Sivaprasad |    94 | FOC          |
++-----------+--------------+-------+-----------+------------+-------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> select regno,name from mentee_details where name IN(select name from mentee_details where dept="CSE");
++-----------+--------------+
+| regno     | name         |
++-----------+--------------+
+| 192211666 | Bhargavreddy |
+| 192211333 | Keerthi      |
++-----------+--------------+
+2 rows in set (0.04 sec)
+
+mysql> create table mentees(Id int(10),name varchar(20),mobileno int(11));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into mentees(Id,name)
+    -> select regno,name
+    -> from mentee_details where dept="BIO";
+Query OK, 1 row affected (0.04 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> select*from mentees;
++-----------+----------+----------+
+| Id        | name     | mobileno |
++-----------+----------+----------+
+| 192211555 | Neelufar |     NULL |
++-----------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select regno,(select name from mentees where Id=192211555)as name,dept,address,fathername,marks,subject from mentee_details where regno=192211555;
++-----------+----------+------+---------+------------+-------+--------------+
+| regno     | name     | dept | address | fathername | marks | subject      |
++-----------+----------+------+---------+------------+-------+--------------+
+| 192211555 | Neelufar | BIO  | Nellore | Mahammad   |    99 | Cell Biology |
++-----------+----------+------+---------+------------+-------+--------------+
+1 row in set (0.00 sec)
