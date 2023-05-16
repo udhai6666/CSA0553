@@ -1,0 +1,98 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| employee           |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
++-------------------+
+2 rows in set (0.01 sec)
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| regno  | int(3)      | NO   | PRI | 0       |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| dept   | varchar(15) | YES  |     | NULL    |       |
+| deptid | int(3)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+mysql> desc studentdetails;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| city       | varchar(15) | YES  |     | NULL    |       |
+| fathername | varchar(20) | YES  |     | NULL    |       |
+| mobileno   | int(10)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+mysql> alter table studentdetails add primary key(regno);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studentdetails;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | NO   | PRI | 0       |       |
+| city       | varchar(15) | YES  |     | NULL    |       |
+| fathername | varchar(20) | YES  |     | NULL    |       |
+| mobileno   | int(10)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table  studentdetails add foreign key(regno) references student(regno);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| regno  | int(3)      | NO   | PRI | 0       |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| dept   | varchar(15) | YES  |     | NULL    |       |
+| deptid | int(3)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> desc studentdetails;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | NO   | PRI | 0       |       |
+| city       | varchar(15) | YES  |     | NULL    |       |
+| fathername | varchar(20) | YES  |     | NULL    |       |
+| mobileno   | int(10)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+mysql> alter table student add unique(deptid);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| regno  | int(3)      | NO   | PRI | 0       |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| dept   | varchar(15) | YES  |     | NULL    |       |
+| deptid | int(3)      | YES  | UNI | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
