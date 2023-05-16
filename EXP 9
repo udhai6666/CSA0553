@@ -1,0 +1,153 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| school             |
+| test               |
+| university         |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use university;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_university |
++----------------------+
+| marks                |
+| marks_view           |
+| mentee_details       |
+| mentees              |
+| staff_details        |
+| stud_department      |
+| stud_details         |
++----------------------+
+7 rows in set (0.00 sec)
+
+mysql> create table mdept(deptid int(5),deptname varchar(20),rollno int(10));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into mdept values(22,"CSE",192211444);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into mdept values(44,"ECE",192211888);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into mdept values(88,"AI&ML",192211555);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> update mdept set deptname="BIO" where rollno=192211888;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mdept;
++--------+----------+-----------+
+| deptid | deptname | rollno    |
++--------+----------+-----------+
+|     22 | CSE      | 192211444 |
+|     44 | BIO      | 192211888 |
+|     88 | AI&ML    | 192211555 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update mdept set deptid=26 where rollno=192211888;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mdept;
++--------+----------+-----------+
+| deptid | deptname | rollno    |
++--------+----------+-----------+
+|     22 | CSE      | 192211444 |
+|     26 | BIO      | 192211888 |
+|     88 | AI&ML    | 192211555 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select deptid,deptname from mdept,mentee_details where mentee_details.regno=mdept.rollno;
++--------+----------+
+| deptid | deptname |
++--------+----------+
+|     22 | CSE      |
+|     88 | AI&ML    |
+|     26 | BIO      |
++--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select deptid,deptname,rollno from mdept,mentee_details where mentee_details.regno=mdept.rollno;
++--------+----------+-----------+
+| deptid | deptname | rollno    |
++--------+----------+-----------+
+|     22 | CSE      | 192211444 |
+|     88 | AI&ML    | 192211555 |
+|     26 | BIO      | 192211888 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select name,deptid,deptname,rollno from mdept m,mentee_details m1 where m1.regno=m.rollno;
++----------+--------+----------+-----------+
+| name     | deptid | deptname | rollno    |
++----------+--------+----------+-----------+
+| Pallavi  |     22 | CSE      | 192211444 |
+| Neelufar |     88 | AI&ML    | 192211555 |
+| Hariram  |     26 | BIO      | 192211888 |
++----------+--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select name,dept,deptid,deptname,rollno from mdept,mentee_details where mentee_details.regno=mdept.rollno;
++----------+-------+--------+----------+-----------+
+| name     | dept  | deptid | deptname | rollno    |
++----------+-------+--------+----------+-----------+
+| Pallavi  | AI&ML |     22 | CSE      | 192211444 |
+| Neelufar | BIO   |     88 | AI&ML    | 192211555 |
+| Hariram  | AI&DS |     26 | BIO      | 192211888 |
++----------+-------+--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select rollno,deptname,name,address from mdept left outer join mentee_details on mdept.rollno=mentee_details.regno;
++-----------+----------+----------+-----------+
+| rollno    | deptname | name     | address   |
++-----------+----------+----------+-----------+
+| 192211444 | CSE      | Pallavi  | Nellore   |
+| 192211888 | BIO      | Hariram  | Tamilnadu |
+| 192211555 | AI&ML    | Neelufar | Nellore   |
++-----------+----------+----------+-----------+
+3 rows in set (0.01 sec)
+
+mysql> select rollno,deptname,name,address from mdept right outer join mentee_details on mdept.rollno=mentee_details.regno;
++-----------+----------+--------------+-----------+
+| rollno    | deptname | name         | address   |
++-----------+----------+--------------+-----------+
+| 192211444 | CSE      | Pallavi      | Nellore   |
+| 192211555 | AI&ML    | Neelufar     | Nellore   |
+|      NULL | NULL     | Udhai        | Kerala    |
+| 192211888 | BIO      | Hariram      | Tamilnadu |
+|      NULL | NULL     | Bhargavreddy | kadapa    |
+|      NULL | NULL     | Keerthi      | Rajempeta |
++-----------+----------+--------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> insert into mdept values(21,"DBMS",192211666);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into mdept values(42,"AI&DS",192211333);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into mdept values(84,"ECE",192211777);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select rollno,deptname,name,address from mdept right outer join mentee_details on mdept.rollno=mentee_details.regno;
++-----------+----------+--------------+-----------+
+| rollno    | deptname | name         | address   |
++-----------+----------+--------------+-----------+
+| 192211444 | CSE      | Pallavi      | Nellore   |
+| 192211555 | AI&ML    | Neelufar     | Nellore   |
+| 192211777 | ECE      | Udhai        | Kerala    |
+| 192211888 | BIO      | Hariram      | Tamilnadu |
+| 192211666 | DBMS     | Bhargavreddy | kadapa    |
+| 192211333 | AI&DS    | Keerthi      | Rajempeta |
++-----------+----------+--------------+-----------+
+6 rows in set (0.00 sec)
