@@ -1,0 +1,89 @@
+mysql> use university;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_university |
++----------------------+
+| marks                |
+| marks_view           |
+| mdept                |
+| mentee_details       |
+| mentees              |
+| staff_details        |
+| stud_department      |
+| stud_details         |
++----------------------+
+8 rows in set (0.00 sec)
+
+mysql> select*from mentee_details;
++-----------+--------------+-------+-----------+------------+-------+--------------+
+| regno     | name         | dept  | address   | fathername | marks | subject      |
++-----------+--------------+-------+-----------+------------+-------+--------------+
+| 192211444 | Pallavi      | AI&ML | Nellore   | vardareddy |    98 | MPMC         |
+| 192211555 | Neelufar     | BIO   | Nellore   | Mahammad   |    99 | Cell Biology |
+| 192211777 | Udhai        | EEE   | Kerala    | Chandra    |    96 | DBMS         |
+| 192211888 | Hariram      | AI&DS | Tamilnadu | Rama       |    92 | PDSD         |
+| 192211666 | Bhargavreddy | CSE   | kadapa    | Subbareddy |    96 | FOC          |
+| 192211333 | Keerthi      | CSE   | Rajempeta | Sivaprasad |    94 | FOC          |
++-----------+--------------+-------+-----------+------------+-------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> create view mark_view as select subject,marks from mentee_details;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from mark_view;
++--------------+-------+
+| subject      | marks |
++--------------+-------+
+| MPMC         |    98 |
+| Cell Biology |    99 |
+| DBMS         |    96 |
+| PDSD         |    92 |
+| FOC          |    96 |
+| FOC          |    94 |
++--------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create index subject on mentee_details(subject);
+ERROR 1061 (42000): Duplicate key name 'subject'
+mysql> create index subject on mentee_details(subject);
+ERROR 1061 (42000): Duplicate key name 'subject'
+mysql> create table percent(perid int NOT NULL AUTO_INCREMENT,Name varchar(50),age int(3),PRIMARY KEY(perid));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc percent;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| perid | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(50) | YES  |     | NULL    |                |
+| age   | int(3)      | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.02 sec)
+
+mysql> alter table percent AUTO_INCREMENT=100;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into percent(name,age) values("Keerthi",18);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from percent;
++-------+---------+------+
+| perid | Name    | age  |
++-------+---------+------+
+|   100 | Keerthi |   18 |
++-------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into percent(name,age) values ("Bhargavreddy",20);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select*from percent;
++-------+--------------+------+
+| perid | Name         | age  |
++-------+--------------+------+
+|   100 | Keerthi      |   18 |
+|   101 | Bhargavreddy |   20 |
++-------+--------------+------+
+2 rows in set (0.00 sec)
