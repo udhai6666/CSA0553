@@ -1,0 +1,53 @@
+mysql> use college;
+Database changed
+mysql> select*from college;
++--------+--------+--------+--------+----------+---------+
+| rollno | name   | gender | dob    | mobileno | city    |
++--------+--------+--------+--------+----------+---------+
+|      4 | geetha | f      | 922005 |  1234876 | guntur  |
+|      3 | bhavya | f      |  11105 | 98657342 | america |
+|      8 | mahesh | m      |   4699 | 83411248 | hyd     |
++--------+--------+--------+--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> update college set name='ramesh' where rollno=8;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from college;
++--------+--------+--------+--------+----------+---------+
+| rollno | name   | gender | dob    | mobileno | city    |
++--------+--------+--------+--------+----------+---------+
+|      4 | geetha | f      | 922005 |  1234876 | guntur  |
+|      3 | bhavya | f      |  11105 | 98657342 | america |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd     |
++--------+--------+--------+--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> update college set cit='mumbai' where name='geetha';
+ERROR 1054 (42S22): Unknown column 'cit' in 'field list'
+mysql> update college set city='mumbai' where name='geetha';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from college;
++--------+--------+--------+--------+----------+---------+
+| rollno | name   | gender | dob    | mobileno | city    |
++--------+--------+--------+--------+----------+---------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai  |
+|      3 | bhavya | f      |  11105 | 98657342 | america |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd     |
++--------+--------+--------+--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> delete from college where name='bhavya';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from college;
++--------+--------+--------+--------+----------+--------+
+| rollno | name   | gender | dob    | mobileno | city   |
++--------+--------+--------+--------+----------+--------+
+|      4 | geetha | f      | 922005 |  1234876 | mumbai |
+|      8 | ramesh | m      |   4699 | 83411248 | hyd    |
++--------+--------+--------+--------+----------+--------+
+2 rows in set (0.00 sec)
